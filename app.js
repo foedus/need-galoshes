@@ -1,25 +1,19 @@
 //
 // Setup dependecies
 //
+var express = require('express');
+var app = express.createServer();
 
-var express = require('express')
-
-var app = express();
-
-  , server = require('http').createServer(app)
-  , io = require('socket.io').listen(server);
-
-//
-//Start the app server
-//
-
-server.listen(8080);
-
+var server = require('http').createServer(app)
+  , io = require('socket.io').listen(server)
+  , stylus = require('stylus')
+  , nib = require('nib')
+  , jade = require('jade');
 
 //
 // Configure basic app settings, using stylus/jade/nib to render
 //
-app.set('title','Galosh-Chat')
+app.set('view engine','jade');
 app.configure(function () {
   app.use(stylus.middleware({ src: __dirname + '/public', compile: compile }));
   app.use(express.static(__dirname + '/public'));
@@ -42,13 +36,22 @@ app.get('/', function (req, res) {
 });
 
 //
+//Start the app server
+//
+
+app.listen(3000, function () {
+  //var addr = app.address();
+  console.log('   app listening on http://localhost:3000');
+});
+
+//
 //Launch Socket.io
 //
 
-var sio = io.listen(app)
-  , nicknames = {};
+//var io = sio.listen(app)
+  var nicknames = {};
 
-sio.sockets.on('connection', function (socket) {
+io.sockets.on('connection', function (socket) {
   socket.on('user message', function (msg) {
     socket.broadcast.emit('user message', socket.nickname, msg);
   });

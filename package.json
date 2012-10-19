@@ -3,9 +3,8 @@
   "version":"0.0.1",
 	 "dependencies": {
 		"socket.io":"*",
-		"express":"~3",
-		"jade": "0.16.4", 
-		"stylus": "0.19.0", 
-		"nib": "0.2.0"
+		"express":"2.x", 
+		"stylus": "0.30.0", 
+		"nib": "0.8.x"
 	}
 }
