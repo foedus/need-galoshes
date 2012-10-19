@@ -1,0 +1,7 @@
+{ "name":"express-app",
+  "description":"My first express app",
+  "version":"0.0.1",
+	 "dependencies": {
+		"socket.io":"*"
+	}
+}
