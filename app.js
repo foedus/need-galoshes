@@ -3,15 +3,15 @@
 //
 
 var express = require('express')
-  , http = require('http').createServer(app)
+
+var app = express();
+
+  , server = require('http').createServer(app)
   , io = require('socket.io').listen(server);
 
 //
 //Start the app server
 //
-
-var app = express();
-var server = http.createServer(app);
 
 server.listen(8080);
 
